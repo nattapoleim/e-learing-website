@@ -13,6 +13,7 @@ import RegisterPage from '@/pages/RegisterPage'
 import Navbar from '@/components/navbar/Navbar'
 
 // Store
+import ProtectRoute from '@/components/protectRoute'
 import useUserStore from '@/store/userStore'
 
 function App() {
@@ -32,7 +33,14 @@ function App() {
                <Route path='/login' element={<LoginPage />} />
                <Route path='/register' element={<RegisterPage />} />
                <Route path='/about' element={<AboutPage />} />
-               <Route path='/courses/:id' element={<CoursePage />} />
+               <Route
+                  path='/courses/:id'
+                  element={
+                     <ProtectRoute>
+                        <CoursePage />
+                     </ProtectRoute>
+                  }
+               />
             </Routes>
          </BrowserRouter>
       </ThemeProvider>

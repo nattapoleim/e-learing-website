@@ -10,13 +10,16 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { AuthService } from '@/services/AuthService'
 import useUserStore from '@/store/userStore'
+import { useNavigate } from 'react-router-dom'
 
 function NavbarProfileDropdown() {
    const { user, setUser } = useUserStore()
+   const navigate = useNavigate()
 
    const hadleLogout = () => {
       AuthService.logout()
       setUser(null)
+      navigate('/')
    }
    return (
       <DropdownMenu>
