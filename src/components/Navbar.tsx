@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 function Navbar() {
    const { theme } = useTheme()
 
-   console.log(theme)
-
    return (
       <header className='py-4 mb-10 border-b'>
          <nav className='container flex items-center justify-between'>

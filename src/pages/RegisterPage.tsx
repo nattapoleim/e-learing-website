@@ -1,3 +1,8 @@
+import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+
+// components
 import {
    AlertDialog,
    AlertDialogCancel,
@@ -10,28 +15,35 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { AuthService } from '@/services/AuthService'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
 
-type LoginInputs = {
+type ResigerInputs = {
+   name: string
    username: string
    password: string
+   confirmPassword: string
 }
 
-function LoginPage() {
+function RegisterPage() {
    const [alertOpen, setAlertOpen] = useState<boolean>(false)
-   const { register, handleSubmit } = useForm<LoginInputs>()
+   const [alertMsg, setAlertMsg] = useState<{ title: string; content: string }>({
+      title: '',
+      content: '',
+   })
+   const { register, handleSubmit } = useForm<ResigerInputs>()
    const navigate = useNavigate()
 
-   const handleLogin: SubmitHandler<LoginInputs> = async data => {
-      const { username, password } = data
-      const user = await AuthService.login(username, password)
-      if (user) {
-         console.log('Login Successful')
-         return navigate('/')
+   const registerSubmit: SubmitHandler<ResigerInputs> = async data => {
+      const { name, username, password, confirmPassword } = data
+
+      if (password === confirmPassword) {
+         const user = await AuthService.register(name, username, password)
+         console.log('Register Successful', user)
+         return navigate('/login')
       } else {
-         console.log('login failed')
+         setAlertMsg({
+            title: 'Register Failed',
+            content: 'Password and Confirm Password do not match!',
+         })
          setAlertOpen(true)
       }
    }
@@ -41,8 +53,8 @@ function LoginPage() {
          <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
             <AlertDialogContent>
                <AlertDialogHeader>
-                  <AlertDialogTitle>Login Failed</AlertDialogTitle>
-                  <AlertDialogDescription>Username or Password not invalid.</AlertDialogDescription>
+                  <AlertDialogTitle>{alertMsg.title}</AlertDialogTitle>
+                  <AlertDialogDescription>{alertMsg.content}</AlertDialogDescription>
                </AlertDialogHeader>
                <AlertDialogFooter>
                   <AlertDialogCancel>Close</AlertDialogCancel>
@@ -50,11 +62,18 @@ function LoginPage() {
             </AlertDialogContent>
          </AlertDialog>
          <main className='max-w-md p-10 mx-auto mt-40 border rounded-md shadow w-md'>
-            <h1 className='mb-4 text-4xl font-bold text-center text-primary'>Login</h1>
-            <form className='space-y-4' onSubmit={handleSubmit(handleLogin)}>
+            <h1 className='mb-4 text-4xl font-bold text-center text-primary'>Register</h1>
+            <form className='space-y-4' onSubmit={handleSubmit(registerSubmit)}>
+               <Input placeholder='Name' {...register('name')} type='text' required />
                <Input placeholder='Username' {...register('username')} type='text' required />
                <Input placeholder='Password' {...register('password')} type='password' required />
-               <Button className='w-full'>Login</Button>
+               <Input
+                  placeholder='Comfirm Password'
+                  {...register('confirmPassword')}
+                  type='password'
+                  required
+               />
+               <Button className='w-full'>Register</Button>
             </form>
             <Link
                to='/register'
@@ -70,4 +89,4 @@ function LoginPage() {
    )
 }
 
-export default LoginPage
+export default RegisterPage
