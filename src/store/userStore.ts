@@ -1,13 +1,13 @@
 import { User } from '@/models/user'
 import { create } from 'zustand'
 
-type Store = {
+type userStore = {
    user: User | null
    setUser: (user: User | null) => void
    loadUser: () => Promise<void>
 }
 
-const useStore = create<Store>(set => ({
+const useUserStore = create<userStore>(set => ({
    user: null,
    setUser: user => set({ user }),
    loadUser: async () => {
@@ -16,4 +16,4 @@ const useStore = create<Store>(set => ({
    },
 }))
 
-export default useStore
+export default useUserStore

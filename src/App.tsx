@@ -1,19 +1,22 @@
 import { ThemeProvider } from '@/components/theme-provider'
+import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // pages
 import AboutPage from '@/pages/AboutPage'
+import CoursePage from '@/pages/CoursePage'
 import HomePage from '@/pages/HomePage'
 import LoginPage from '@/pages/LoginPage'
 import RegisterPage from '@/pages/RegisterPage'
 
 // components
-import Navbar from '@/components/Navbar'
-import useStore from '@/store/store'
-import { useEffect } from 'react'
+import Navbar from '@/components/navbar/Navbar'
+
+// Store
+import useUserStore from '@/store/userStore'
 
 function App() {
-   const { loadUser } = useStore()
+   const { loadUser } = useUserStore()
 
    useEffect(() => {
       loadUser()
@@ -29,6 +32,7 @@ function App() {
                <Route path='/login' element={<LoginPage />} />
                <Route path='/register' element={<RegisterPage />} />
                <Route path='/about' element={<AboutPage />} />
+               <Route path='/courses/:id' element={<CoursePage />} />
             </Routes>
          </BrowserRouter>
       </ThemeProvider>

@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Course } from '@/models/course'
+import { Link } from 'react-router-dom'
 
 type CourseListProps = {
    courses: Course[]
@@ -27,9 +28,11 @@ function CourseList({ courses }: CourseListProps) {
                      <AccordionContent className='w-full '>
                         <p>{course.description}</p>
                         <div className='flex items-center justify-end w-full mt-6'>
-                           <Button color='primary' size='sm' className='ml-auto'>
-                              see more
-                           </Button>
+                           <Link to={`/courses/${course.id}`}>
+                              <Button color='primary' size='sm' className='ml-auto'>
+                                 see more
+                              </Button>
+                           </Link>
                         </div>
                      </AccordionContent>
                   </AccordionItem>
