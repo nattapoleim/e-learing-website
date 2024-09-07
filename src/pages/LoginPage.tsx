@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { AuthService } from '@/services/AuthService'
+import useStore from '@/store/store'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -24,11 +25,14 @@ function LoginPage() {
    const { register, handleSubmit } = useForm<LoginInputs>()
    const navigate = useNavigate()
 
+   const { loadUser } = useStore()
+
    const handleLogin: SubmitHandler<LoginInputs> = async data => {
       const { username, password } = data
       const user = await AuthService.login(username, password)
       if (user) {
          console.log('Login Successful')
+         loadUser()
          return navigate('/')
       } else {
          console.log('login failed')

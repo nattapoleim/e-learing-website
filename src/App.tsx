@@ -9,8 +9,17 @@ import RegisterPage from '@/pages/RegisterPage'
 
 // components
 import Navbar from '@/components/Navbar'
+import useStore from '@/store/store'
+import { useEffect } from 'react'
 
 function App() {
+   const { loadUser } = useStore()
+
+   useEffect(() => {
+      loadUser()
+      console.log('load user')
+   }, [loadUser])
+
    return (
       <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
          <BrowserRouter>
