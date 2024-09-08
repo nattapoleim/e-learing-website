@@ -18,7 +18,13 @@ export class DataManager {
       const res = await fetch(import.meta.env.VITE_API_URL + '/courses')
       const coursesData: Course[] = await res.json()
       this.courses = coursesData.map(course => {
-         const curCourse = new Course(course.id, course.name, course.description, course.category)
+         const curCourse = new Course(
+            course.id,
+            course.name,
+            course.description,
+            course.image,
+            course.category,
+         )
          course.lectures.map(lecture =>
             curCourse.addLecture(new Lecture(lecture.id, lecture.title, lecture.duration)),
          )

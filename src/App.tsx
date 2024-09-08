@@ -14,6 +14,7 @@ import Navbar from '@/components/navbar/Navbar'
 
 // Store
 import ProtectRoute from '@/components/protectRoute'
+import LecturePage from '@/pages/LecturePage'
 import useUserStore from '@/store/userStore'
 
 function App() {
@@ -33,11 +34,12 @@ function App() {
                <Route path='/login' element={<LoginPage />} />
                <Route path='/register' element={<RegisterPage />} />
                <Route path='/about' element={<AboutPage />} />
+               <Route path='/courses/:id' element={<CoursePage />} />
                <Route
-                  path='/courses/:id'
+                  path='/courses/:courseId/:lectureId'
                   element={
                      <ProtectRoute>
-                        <CoursePage />
+                        <LecturePage />
                      </ProtectRoute>
                   }
                />

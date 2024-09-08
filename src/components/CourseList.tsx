@@ -18,16 +18,23 @@ function CourseList({ courses }: CourseListProps) {
    return (
       <div className='p-10 mt-5 border rounded-md shadow'>
          <p className='mb-4 text-xl font-semibold uppercase text-primary'>Courses</p>
-         <div className='grid items-center w-full grid-cols-3 gap-10 justify-evenly'>
+         <div className='grid w-full gap-4 md:grid-cols-2 lg:gap-10 xl:grid-cols-3'>
             {courses?.map(course => (
                <Card
                   key={course.id}
-                  className='w-[350px] h-[14.5rem] flex flex-col justify-between'
+                  className='group md:h-[26rem] flex flex-col justify-between md:hover:-translate-y-2 transition-all hover:shadow-xl'
                >
                   <CardHeader>
-                     <CardTitle>{course.name}</CardTitle>
+                     <div className='overflow-hidden  bg-green-300 rounded-lg h-[15rem] md:h-[10rem] xl:h-[11rem]'>
+                        <img
+                           className='w-full object-cover h-full scale-[1.06] group-hover:scale-110 transition-all'
+                           src={course.image}
+                           alt={course.name + '_image'}
+                        />
+                     </div>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className='space-y-2'>
+                     <CardTitle className='text-lg'>{course.name}</CardTitle>
                      <CardDescription>{course.description}</CardDescription>
                   </CardContent>
                   <CardFooter className='justify-end pb-5'>

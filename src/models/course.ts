@@ -4,13 +4,15 @@ export class Course {
    id: number
    name: string
    description: string
+   image: string
    category: string
    lectures: Lecture[]
 
-   constructor(id: number, name: string, description: string, category: string) {
+   constructor(id: number, name: string, description: string, image: string, category: string) {
       this.id = id
       this.name = name
       this.description = description
+      this.image = import.meta.env.VITE_API_URL + '/' + image
       this.category = category
       this.lectures = []
    }
@@ -27,6 +29,7 @@ export class Course {
             courseData.id,
             courseData.name,
             courseData.description,
+            courseData.image,
             courseData.category,
          )
          courseData.lectures.map(lecture =>
