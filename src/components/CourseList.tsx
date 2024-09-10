@@ -16,8 +16,8 @@ type CourseListProps = {
 
 function CourseList({ courses }: CourseListProps) {
    return (
-      <div className='p-4 mt-5 border rounded-md shadow md:p-10'>
-         <p className='mb-4 text-xl font-semibold uppercase text-primary'>Courses</p>
+      <div className='p-4 md:p-10'>
+         <h3 className='mb-4 font-serif text-3xl font-semibold text-center uppercase '>Courses</h3>
          <div className='grid w-full gap-4 md:grid-cols-2 lg:gap-10 xl:grid-cols-3'>
             {courses?.map(course => (
                <Card
@@ -39,7 +39,7 @@ function CourseList({ courses }: CourseListProps) {
                   </CardContent>
                   <CardFooter className='justify-end pb-5'>
                      <Link to={`/courses/${course.id}`}>
-                        <Button>See More</Button>
+                        <Button className=''>See More</Button>
                      </Link>
                   </CardFooter>
                </Card>

@@ -1,4 +1,5 @@
-import { ThemeProvider } from '@/components/theme-provider'
+import AppTheme from '@/AppTheme'
+import CssBaseline from '@mui/material/CssBaseline'
 import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -6,16 +7,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AboutPage from '@/pages/AboutPage'
 import CoursePage from '@/pages/CoursePage'
 import HomePage from '@/pages/HomePage'
+import LecturePage from '@/pages/LecturePage'
 import LoginPage from '@/pages/LoginPage'
+import NotFoundPage from '@/pages/NotFoundPage'
 import RegisterPage from '@/pages/RegisterPage'
 
 // components
+import Footer from '@/components/Footer'
 import Navbar from '@/components/navbar/Navbar'
+import ProtectRoute from '@/components/protectRoute'
 
 // Store
-import Footer from '@/components/Footer'
-import ProtectRoute from '@/components/protectRoute'
-import LecturePage from '@/pages/LecturePage'
 import useUserStore from '@/store/userStore'
 
 function App() {
@@ -27,10 +29,12 @@ function App() {
    }, [loadUser])
 
    return (
-      <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+      <AppTheme>
+         <CssBaseline />
          <BrowserRouter>
             <Navbar />
             <Routes>
+               <Route path='*' element={<NotFoundPage />} />
                <Route path='/' element={<HomePage />} />
                <Route path='/login' element={<LoginPage />} />
                <Route path='/register' element={<RegisterPage />} />
@@ -47,7 +51,7 @@ function App() {
             </Routes>
             <Footer />
          </BrowserRouter>
-      </ThemeProvider>
+      </AppTheme>
    )
 }
 

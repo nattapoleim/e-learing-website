@@ -3,27 +3,39 @@ import { Course } from '@/models/course'
 import useUserStore from '@/store/userStore'
 import { CircleCheckBig, Clock } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 function CoursePage() {
    const [course, setCourse] = useState<Course>()
    const { user } = useUserStore()
    const { id } = useParams()
+   const navigate = useNavigate()
    console.log(user)
 
    useEffect(() => {
       const courseId = id ? parseInt(id) : undefined
       const fetchCourseData = async () => {
-         if (courseId === undefined) return
+         if (courseId === undefined) {
+            navigate('/errorpage')
+            return
+         }
          try {
             const getCourse = await Course.fetchCourse(courseId)
             setCourse(getCourse)
+            if (!getCourse) {
+               navigate('/errorpage')
+               return
+            }
          } catch (error) {
             console.error('Error fetch course data failed: ', error)
+            if (!course) {
+               navigate('/errorpage')
+               return
+            }
          }
       }
       fetchCourseData()
-   }, [id])
+   }, [course, id, navigate])
 
    return (
       <section className='container mt-10'>
