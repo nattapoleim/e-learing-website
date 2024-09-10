@@ -1,5 +1,6 @@
-import { Button } from '@/components/ui/button'
 import { Category } from '@/models/category'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 
 type CategoriesComponentProps = {
    handleCategoryChange: (categoryName: string) => void
@@ -8,22 +9,22 @@ type CategoriesComponentProps = {
 
 function CategoriesComponent({ handleCategoryChange, categories }: CategoriesComponentProps) {
    return (
-      <section id='categories' className='py-6'>
-         <div className='flex flex-wrap items-center justify-center gap-2'>
-            <Button size={'sm'} onClick={() => handleCategoryChange('')}>
+      <Box component={'section'} id='categories' className='py-6'>
+         <Box className='flex flex-wrap items-center justify-center gap-2'>
+            <Button variant='contained' onClick={() => handleCategoryChange('')}>
                All Course
             </Button>
             {categories?.map(category => (
                <Button
                   key={category.id}
-                  size={'sm'}
+                  variant='contained'
                   onClick={() => handleCategoryChange(category.name)}
                >
                   {category.name}
                </Button>
             ))}
-         </div>
-      </section>
+         </Box>
+      </Box>
    )
 }
 

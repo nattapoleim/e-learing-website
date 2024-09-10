@@ -1,43 +1,61 @@
-import { Button } from '@/components/ui/button'
-import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuGroup,
-   DropdownMenuItem,
-   DropdownMenuLabel,
-   DropdownMenuSeparator,
-   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { AuthService } from '@/services/AuthService'
 import useUserStore from '@/store/userStore'
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function NavbarProfileDropdown() {
    const { user, setUser } = useUserStore()
+   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+   const open = Boolean(anchorEl)
    const navigate = useNavigate()
 
-   const hadleLogout = () => {
+   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget)
+   }
+   const handleClose = () => {
+      setAnchorEl(null)
+   }
+
+   const handleLogout = () => {
       AuthService.logout()
+      setAnchorEl(null)
       setUser(null)
       navigate('/')
    }
    return (
-      <DropdownMenu>
-         <DropdownMenuTrigger asChild>
-            <Button variant={'outline'}>{user?.name.split(' ')[0]}</Button>
-         </DropdownMenuTrigger>
-         <DropdownMenuContent className='w-56'>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-               <DropdownMenuItem disabled>Profile</DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={hadleLogout} className='cursor-pointer'>
-               Log out
-            </DropdownMenuItem>
-         </DropdownMenuContent>
-      </DropdownMenu>
+      <div>
+         <Button
+            id='basic-button'
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup='true'
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            variant='outlined'
+            color='primary'
+         >
+            {user?.name.split(' ')[0]}
+         </Button>
+         <Menu
+            id='basic-menu'
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+               'aria-labelledby': 'basic-button',
+            }}
+         >
+            <MenuItem onClick={handleClose} disabled>
+               Profile
+            </MenuItem>
+            <MenuItem onClick={handleClose} disabled>
+               My account
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+         </Menu>
+      </div>
    )
 }
 
