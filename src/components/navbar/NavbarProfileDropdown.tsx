@@ -34,7 +34,7 @@ function NavbarProfileDropdown() {
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
             variant='outlined'
-            color='primary'
+            color='inherit'
          >
             {user?.name.split(' ')[0]}
          </Button>

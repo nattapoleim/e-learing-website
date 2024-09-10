@@ -39,7 +39,7 @@ function CoursePage() {
 
    return (
       <Box component={'section'} className='py-10 bg-white'>
-         <Container maxWidth='xl'>
+         <Container maxWidth='lg'>
             <Box className='flex flex-col-reverse items-center w-full px-4 sm:px-10 md:px-0 md:flex-row'>
                <Box className='w-full mt-10 space-y-4 md:w-1/2 md:mt-0'>
                   <Typography
@@ -61,14 +61,14 @@ function CoursePage() {
                      <Box
                         component={'article'}
                         key={lecture.id}
-                        className='flex items-center justify-between px-5 py-2 transition-all rounded-md bg-slate-200 hover:bg-purple-200'
+                        className='flex flex-col items-center justify-between px-5 py-2 transition-all rounded-md sm:flex-row bg-slate-200 hover:bg-purple-200'
                      >
-                        <Box className='flex flex-col items-start gap-6 sm:items-center sm:flex-row md:py-4'>
+                        <Box className='flex flex-col items-start w-full gap-2 md:items-center l md:gap-6 md:flex-row md:py-4'>
                            <Typography className='text-4xl md:text-6xl' color='primary'>
                               0{index + 1}
                            </Typography>
                            <Box>
-                              <Typography variant='h2' className='font-medium md:text-xl'>
+                              <Typography className='text-xl font-medium md:text-xl'>
                                  {lecture.title}
                               </Typography>
                               <Typography className='inline-flex items-center gap-2 mt-2 text-sm sm:text-[1rem] text-slate-600'>
@@ -76,12 +76,12 @@ function CoursePage() {
                               </Typography>
                            </Box>
                         </Box>
-                        <div className='flex items-center gap-4'>
+                        <Box className='flex items-end justify-end w-full h-full gap-4 my-4 sm:mt-0 md:items-center'>
                            <div>{lecture.completed && <CircleCheckBig />}</div>
                            <Link to={`/courses/${course.id}/${lecture.id}`}>
                               <Button variant='contained'>Learn</Button>
                            </Link>
-                        </div>
+                        </Box>
                      </Box>
                   ))}
                </Box>

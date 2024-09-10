@@ -7,13 +7,17 @@ import {
    AlertDialogHeader,
    AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { AuthService } from '@/services/AuthService'
 import useStore from '@/store/userStore'
+import { Stack } from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Link from '@mui/material/Link'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 
 type LoginInputs = {
    username: string
@@ -41,7 +45,7 @@ function LoginPage() {
    }
 
    return (
-      <section className='container'>
+      <Box component='section' className='flex h-[calc(100svh-8rem)] items-center justify-center'>
          <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
             <AlertDialogContent>
                <AlertDialogHeader>
@@ -53,24 +57,54 @@ function LoginPage() {
                </AlertDialogFooter>
             </AlertDialogContent>
          </AlertDialog>
-         <main className='max-w-md p-10 mx-auto mt-40 border rounded-md shadow w-md'>
-            <h1 className='mb-4 text-4xl font-bold text-center text-primary'>Login</h1>
-            <form className='space-y-4' onSubmit={handleSubmit(handleLogin)}>
-               <Input placeholder='Username' {...register('username')} type='text' required />
-               <Input placeholder='Password' {...register('password')} type='password' required />
-               <Button className='w-full'>Login</Button>
-            </form>
-            <Link
+         <Box
+            component='main'
+            color='primary.main'
+            border={'1px solid'}
+            className='p-10 mx-auto rounded shadow-xl w-[28rem]'
+         >
+            <Typography
+               variant='h1'
+               className='mb-4 font-serif text-4xl font-bold text-center uppercase text-primary'
+            >
+               Log In
+            </Typography>
+            <Box component='form' className='' onSubmit={handleSubmit(handleLogin)}>
+               <Stack spacing={2} useFlexGap>
+                  <TextField
+                     label='Username'
+                     fullWidth
+                     {...register('username')}
+                     placeholder='username'
+                     type='text'
+                     autoComplete='current-username'
+                     required
+                  />
+                  <TextField
+                     fullWidth
+                     label='Password'
+                     {...register('password')}
+                     type='password'
+                     placeholder='**********'
+                     required
+                     autoComplete='current-password'
+                  />
+                  <Button type='submit' variant='contained' size='large' className='w-full'>
+                     Login
+                  </Button>
+               </Stack>
+            </Box>
+            <RouterLink
                to='/register'
-               className='flex items-center justify-center mt-4 text-sm font-light'
+               className='flex items-center justify-center mt-4 text-sm text-black no-underline'
             >
                Don't have an account ?
-               <Button variant='link' className='px-2 text-sm font-light text-primary/80 '>
+               <Link variant='body2' className='px-2 text-sm font-light text-primary/80 '>
                   Register now
-               </Button>
-            </Link>
-         </main>
-      </section>
+               </Link>
+            </RouterLink>
+         </Box>
+      </Box>
    )
 }
 

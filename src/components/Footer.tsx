@@ -9,39 +9,46 @@ function Footer() {
       <Box
          component={'footer'}
          borderTop={'1px solid #e2e8f0'}
+         bgcolor='primary.main'
          className='pt-10 pb-6 mt-20 min-h-52'
       >
-         <Container maxWidth='xl' className='flex items-center justify-between h-full'>
+         <Container
+            maxWidth='xl'
+            className='flex flex-col items-center justify-between h-full gap-10 sm:flex-row'
+         >
             <Box>
                <Link to='/' className='no-underline'>
                   <Typography
-                     color='primary'
+                     color='white'
                      variant='body1'
-                     className='font-serif text-6xl font-semibold tracking-widest '
+                     className='font-serif text-3xl font-semibold tracking-widest sm:text-6xl '
                   >
                      VAANDEMY.
                   </Typography>
                </Link>
-               <Typography color='primary' className='font-semibold tracking-widest'>
+               <Typography
+                  color='white'
+                  className='text-sm font-semibold tracking-widest text-end sm:text-lg'
+               >
                   Learning Space
                </Typography>
             </Box>
-            <div className='grid gap-2 text-xl uppercase text-end'>
+            <Box className='grid grid-cols-2 gap-2 text-xl uppercase sm:grid-cols-1 text-end'>
                <Link to='/'>
-                  <Button variant='text' className='text-2xl font-light text-black'>
+                  <Button variant='text' className='text-lg text-white sm:text-2xl'>
                      Home
                   </Button>
                </Link>
                <Link to='/about'>
-                  <Button variant='text' className='text-2xl font-light text-black'>
+                  <Button variant='text' className='text-lg text-white sm:text-2xl'>
                      About
                   </Button>
                </Link>
-            </div>
+            </Box>
          </Container>
-         <p className='mt-6 text-sm text-center uppercase text-slate-600'>
+         <Typography className='mt-6 text-sm text-center uppercase text-slate-200'>
             © 2024 Nattapol Eiamsa-Ard
-         </p>
+         </Typography>
       </Box>
    )
 }

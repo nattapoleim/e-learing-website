@@ -15,8 +15,14 @@ type CourseListProps = {
 function CourseList({ courses }: CourseListProps) {
    return (
       <Box className='p-4 md:p-10'>
-         <h3 className='mb-4 font-serif text-3xl font-semibold text-center uppercase '>Courses</h3>
-         <div className='grid w-full gap-4 md:grid-cols-2 lg:gap-10 xl:grid-cols-3'>
+         <Typography
+            variant='h3'
+            color='primary'
+            className='mb-10 font-serif text-4xl font-semibold text-center uppercase '
+         >
+            Courses
+         </Typography>
+         <Box className='grid w-full gap-4 md:grid-cols-2 lg:gap-10 xl:grid-cols-3'>
             {courses?.map(course => (
                <Card
                   key={course.id}
@@ -42,7 +48,7 @@ function CourseList({ courses }: CourseListProps) {
                   </CardActions>
                </Card>
             ))}
-         </div>
+         </Box>
       </Box>
    )
 }
