@@ -1,5 +1,4 @@
 import { ModeToggle } from '@/components/mode-toggle'
-import { useTheme } from '@/components/theme-provider'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import useUserStore from '@/store/userStore'
@@ -12,10 +11,10 @@ function Navbar() {
    const { user } = useUserStore()
 
    return (
-      <header className='py-4 mb-10 border-b'>
-         <nav className='container flex items-center justify-between'>
-            <Link to='/' className='text-2xl font-medium text-primary'>
-               VDM
+      <header className='h-16 border-b'>
+         <nav className='container flex items-center justify-between h-full'>
+            <Link to='/' className='font-serif text-2xl font-medium tracking-wider text-primary'>
+               VAANDEMY. <span className='text-xs font-noto'>Learning Space</span>
             </Link>
             <div className='flex items-center gap-4'>
                <LinkButton to='/'>Home</LinkButton>
@@ -35,17 +34,9 @@ function Navbar() {
 }
 
 const LinkButton = ({ to, children }: { to: string; children: React.ReactNode }) => {
-   const { theme } = useTheme()
    return (
       <Link to={to}>
-         <Button
-            variant='link'
-            className={cn(
-               'px-1',
-               theme === 'dark' && 'text-white',
-               theme === 'light' && 'text-slate-950',
-            )}
-         >
+         <Button variant='link' className={cn('px-1 text-current')}>
             {children}
          </Button>
       </Link>

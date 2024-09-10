@@ -8,7 +8,7 @@ type CategoriesComponentProps = {
 
 function CategoriesComponent({ handleCategoryChange, categories }: CategoriesComponentProps) {
    return (
-      <div className='py-4 border shadow'>
+      <section id='categories' className='py-4 border shadow'>
          <div className='flex flex-wrap items-center justify-center gap-2'>
             <Button size={'sm'} onClick={() => handleCategoryChange('')}>
                All Course
@@ -23,7 +23,7 @@ function CategoriesComponent({ handleCategoryChange, categories }: CategoriesCom
                </Button>
             ))}
          </div>
-      </div>
+      </section>
    )
 }
 

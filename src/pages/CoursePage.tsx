@@ -26,7 +26,7 @@ function CoursePage() {
    }, [id])
 
    return (
-      <section className='container'>
+      <section className='container mt-10'>
          <main>
             <div className='flex flex-col-reverse items-center w-full px-4 sm:px-10 md:px-0 md:flex-row'>
                <div className='w-full mt-10 space-y-4 md:w-1/2 md:mt-0'>
@@ -42,7 +42,7 @@ function CoursePage() {
                </div>
             </div>
             <div className='my-10 rounded-md bg-secondary'>
-               <div className='p-5 space-y-4 overflow-hidden'>
+               <div className='p-4 space-y-4 overflow-hidden'>
                   {course?.lectures.map((lecture, index) => (
                      <article
                         key={lecture.id}

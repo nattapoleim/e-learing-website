@@ -13,6 +13,7 @@ import RegisterPage from '@/pages/RegisterPage'
 import Navbar from '@/components/navbar/Navbar'
 
 // Store
+import Footer from '@/components/Footer'
 import ProtectRoute from '@/components/protectRoute'
 import LecturePage from '@/pages/LecturePage'
 import useUserStore from '@/store/userStore'
@@ -44,6 +45,7 @@ function App() {
                   }
                />
             </Routes>
+            <Footer />
          </BrowserRouter>
       </ThemeProvider>
    )

@@ -1,5 +1,6 @@
 import CategoriesComponent from '@/components/CategoriesComponent'
 import CourseList from '@/components/CourseList'
+import Hero from '@/components/Hero'
 import { Category } from '@/models/category'
 import { Course } from '@/models/course'
 import { DataManager } from '@/services/dataManager'
@@ -38,7 +39,8 @@ function HomePage() {
    }
 
    return (
-      <section className='container'>
+      <section className=''>
+         <Hero />
          <CategoriesComponent categories={categories} handleCategoryChange={handleCategoryChange} />
          <CourseList courses={courses} />
       </section>
